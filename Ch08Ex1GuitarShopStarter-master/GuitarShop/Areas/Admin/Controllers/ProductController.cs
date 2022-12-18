@@ -42,11 +42,17 @@ namespace GuitarShop.Areas.Admin.Controllers
             }
 
             // use ViewBag to pass category data to view
-            ViewBag.Categories = categories;
-            ViewBag.SelectedCategoryName = id;
+            //ViewBag.Categories = categories;
+            //ViewBag.SelectedCategoryName = id;
 
             // bind products to view
-            return View(products);
+            var model = new ProductListViewModel
+            {
+                Categories = categories,
+                Products = products,
+                SelectedCategory = id
+            };
+            return View(model);
         }
 
         [HttpGet]
@@ -88,10 +94,12 @@ namespace GuitarShop.Areas.Admin.Controllers
                 if (product.ProductID == 0)           // new product
                 {
                     context.Products.Add(product);
+                    TempData["UserMessage"] = $" You've just added the product {product.Name}";
                 }
                 else                                  // existing product
                 {
                     context.Products.Update(product);
+                    TempData["UserMessage"] = $" You've just updated the product {product.Name}";
                 }
                 context.SaveChanges();
                 return RedirectToAction("List");

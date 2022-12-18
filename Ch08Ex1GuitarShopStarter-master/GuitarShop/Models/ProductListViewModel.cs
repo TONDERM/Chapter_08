@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using GuitarShop.Models;
 
-namespace GuitarShop.ViewModels
+namespace GuitarShop.Models
 {
     public class ProductListViewModel
     {

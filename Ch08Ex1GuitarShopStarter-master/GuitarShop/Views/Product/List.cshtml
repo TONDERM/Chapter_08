@@ -7,18 +7,18 @@
 <div class="row">
     <div class="col-sm-2">
             <a asp-controller="Product" asp-action="List" asp-route-id="All" 
-                class="list-group-item 
-                @(ViewBag.SelectedCategory == "All" ? "active" : "")">
+                class="list-group-item
+                @(Model.SelectedCategory)">
                 All
             </a>
 
-            @foreach (Category c in ViewBag.Categories)
+            @foreach (Category category in Model.Categories)
             {
 
-                    <a asp-controller="Product" asp-action="List" asp-route-id="@c.Name" 
+                    <a asp-controller="Product" asp-action="List" asp-route-id="@category.Name" 
                        class="list-group-item
-                             @(ViewBag.SelectedCategory == c.Name ? "active" : "")">
-                        @c.Name
+                             @Model.CheckActiveCategory(category.Name)">
+                        @category.Name
                     </a>
 
             }
@@ -34,7 +34,7 @@
                     <th></th>
             </thead>
             <tbody>
-                @foreach (var product in ViewBag.products)
+                @foreach (var product in Model.Products)
                 {
                     <tr>
                         <td>@product.Name</td>
